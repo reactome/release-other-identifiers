@@ -4,25 +4,19 @@ import org.gk.model.GKInstance;
 import org.gk.model.ReactomeJavaConstants;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.powermock.core.classloader.annotations.PowerMockIgnore;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({PostStepChecks.class})
-@PowerMockIgnore({"org.apache.logging.log4j.*", "javax.management.*", "javax.script.*",
-        "javax.xml.*", "com.sun.org.apache.xerces.*", "org.xml.sax.*", "com.sun.xml.*", "org.w3c.dom.*", "org.mockito.*"})
+@RunWith(MockitoJUnitRunner.class)
 public class PostStepChecksTest {
 
     private final long correctOtherIdentifierCount = 1L;
@@ -59,7 +53,9 @@ public class PostStepChecksTest {
     public void instanceWithOtherIdentifiersReturnsTrue() throws Exception {
         rgpInstanceCollection.add(mockRGPInstance);
         otherIdentifierList.add("Mock otherIdentifier");
-        Mockito.when(mockRGPInstance.getAttributeValuesList(ReactomeJavaConstants.otherIdentifier)).thenReturn(otherIdentifierList);
+        Mockito.when(
+            mockRGPInstance.getAttributeValuesList(ReactomeJavaConstants.otherIdentifier)
+        ).thenReturn(otherIdentifierList);
         boolean hasOtherIdentifiers = PostStepChecks.hasOtherIdentifiers(mockRGPInstance);
         assertThat(hasOtherIdentifiers, is(equalTo(true)));
     }

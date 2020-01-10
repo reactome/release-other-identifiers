@@ -53,9 +53,7 @@ public class PostStepChecksTest {
     public void instanceWithOtherIdentifiersReturnsTrue() throws Exception {
         rgpInstanceCollection.add(mockRGPInstance);
         otherIdentifierList.add("Mock otherIdentifier");
-        Mockito.when(
-            mockRGPInstance.getAttributeValuesList(ReactomeJavaConstants.otherIdentifier)
-        ).thenReturn(otherIdentifierList);
+        Mockito.when(mockRGPInstance.getAttributeValuesList(ReactomeJavaConstants.otherIdentifier)).thenReturn(otherIdentifierList);
         boolean hasOtherIdentifiers = PostStepChecks.hasOtherIdentifiers(mockRGPInstance);
         assertThat(hasOtherIdentifiers, is(equalTo(true)));
     }

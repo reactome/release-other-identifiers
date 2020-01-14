@@ -3,4 +3,4 @@ target/
 
 # Ignore IntelliJ files
 .idea/
-otherIdentifiers.iml
+other-identifiers.iml
